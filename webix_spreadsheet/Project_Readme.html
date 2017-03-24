@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Your ASP.NET application</title>
+    <style>
+        body {
+            background: #fff;
+            color: #505050;
+            font: 14px 'Segoe UI', tahoma, arial, helvetica, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        #header {
+            background: #efefef;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: normal;
+            margin: 0;
+            padding: 0 30px;
+            line-height: 150px;
+        }
+
+        p {
+            font-size: 20px;
+            color: #fff;
+            background: #969696;
+            padding: 0 30px;
+            line-height: 50px;
+        }
+
+        #main {
+            padding: 5px 30px;
+        }
+
+        .section {
+            width: 21.7%;
+            float: left;
+            margin: 0 0 0 4%;
+        }
+
+            .section h2 {
+                font-size: 13px;
+                text-transform: uppercase;
+                margin: 0;
+                border-bottom: 1px solid silver;
+                padding-bottom: 12px;
+                margin-bottom: 8px;
+            }
+
+            .section.first {
+                margin-left: 0;
+            }
+
+                .section.first h2 {
+                    font-size: 24px;
+                    text-transform: none;
+                    margin-bottom: 25px;
+                    border: none;
+                }
+
+                .section.first li {
+                    border-top: 1px solid silver;
+                    padding: 8px 0;
+                }
+
+            .section.last {
+                margin-right: 0;
+            }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            line-height: 20px;
+        }
+
+        li {
+            padding: 4px 0;
+        }
+
+        a {
+            color: #267cb2;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+       <p>This project is built in VS2015 with .net framework 4.6
+        <ul>
+            <li>pre-requisities: </li>
+            <li>  VS 2015</li>
+            <li> .Net framework 4.6 or above</li>
+</ul>
+</p>
+    </div>
+
+    <div id="main">
+        <div class="section first">
+            <h2>Brief about the project :</h2>
+            <ul>
+                <li> this .net app is created for API to save data to DB and hosted the html files for the sake of avoiding CORS.(we can fix by enabling cors at server  side and modifying webix api to handle preflight requests.) </li>
+
+                <li> a LOCAL SQL MDF file is selected for DB operations and it is included in the project.</li>
+                <li> webix client is included in the project under scripts/codebase folder.</li>
+                <li> no other UI frameworks are used except WEBIX.</li>
+                <li> the project is set to open readme.html file instead of default serverpage. if it goes to default page please redirect to index.html.</li>
+                <li style="color:red"> after clicking the save button, we need to wait until the green "tick" image loads before going to next page.</li>
+                <li> lot of packages are loaded by default which are not required. need to clean up.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Assumptions:</h2>
+            <ul>
+                <li>no proper Schema is defined for EXCEL, So 4 columns have been considered and if not provided, automatically adding the columns. </li>
+                <li>last updated records to be available on top for editing.</li>
+                <li>Only one row must be edited at any given time.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2><u>TODO items:</u></h2>
+            <ul>
+                <li> it can be easily converted to repository pattern to change the repository to file/DB server/any source.</li>
+                <li> can be extended the webix to handle CORS, to decouple the API from webclient (HTML pages).</li>
+                <li> A schema can be defined in EXCEL and can be used in conjunction with .INI file to use OLE provider to import data to data source.</li>
+                <li> Recording editor page can be decoupled from fixed schema by using MONGODB to store any EXCEL data instead of constraining to a specific SCHEMA.</li>
+                <li> UNIT Testing the api.</li>
+                <li> Security needs to implemented at API level.</li>
+                <li> proper error and exception handling.</li>
+                <li> code cleanup.</li>
+            </ul>
+        </div>
+
+        <div class="section last">
+            <h2>Prohject Links</h2>
+            <ul>
+                <li><a href="http://localhost:61401/Index.html">to Start the app or to load EXCEL sheet</a></li>
+                <li><a href="http://localhost:61401/data_editor.html">To Edit the existing data</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

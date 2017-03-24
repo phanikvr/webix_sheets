@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+	<title>Import from Excel</title>
+    <script src="Scripts/codebase/webix/webix.js"></script>
+
+    <script src="Scripts/codebase/spreadsheet.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="Scripts/codebase/webix/webix.css">
+    <link rel="stylesheet" type="text/css" href="Scripts/codebase/spreadsheet.css">
+</head>
+<body>
+<div id="testA" style="margin:20px;" class="">
+<script>
+    function getParameterByName(name, url) {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+grid = webix.ui({
+		container:"testA",
+		view: "datatable",
+		//datatype:"csv",
+		//columns: [            
+        //        { map: "#data0#", header: "First", editor:"text"},
+        //        { id:"data1", map: "#data1#", header: "Second", editor: "text" },
+		//		{ header:"", template : "<input class='editBtn' type='Button' value='Edit'/>"},
+		//		{ header:"", template : "<input class='saveBtn' type='Button' value='Save'/>"}
+    //		],
+    columns: [            
+            { id: 'Id', header: "", hidden: true },
+            { id:"Column1", editor: "text" },
+            { id:"Column2", editor: "text" },
+            { id:"Column3", editor: "text" },
+            { id:"Column4", editor: "text" },
+    		{ header:"", template : "<input class='editBtn' type='Button' value='Edit'/>"},
+    		{ header:"", template : "<input class='saveBtn' type='Button' value='Save'/>"}
+    		],
+		autoheight:true,
+		select : "row",
+		multiselect : false,
+		autowidth:true,
+		editable:false,
+		editaction:"custom",
+		onClick:{ 
+		"editBtn":function(e, id, trg){
+					this.editStop();
+					this.editRow(id);
+					this.focusEditor();
+					webix.message("row: "+id); 
+					return false; //here it blocks default behavior
+				},
+		"saveBtn":function(e, id, trg){
+					this.editStop();
+					var filename = getParameterByName('file');                    
+					//var data = { "filename": filename, "record": grid.getItem(id) };					
+					webix.ajax().headers({
+					    "Content-type": "application/json"
+					}).post("api/account/SaveData?id=" + grid.getItem(id).Id, JSON.stringify(JSON.stringify(grid.getItem(id))),
+                    function (text, xml, xhr) {
+                        webix.message(text);
+                    });
+					return false; //here it blocks default behavior
+				},		
+  },
+    //url: "Scripts/Data/" + getParameterByName('file'),
+		url: "api/Account/getExcelData",
+			});			
+	</script>
+</div>
+	
+</body>
+</html>
